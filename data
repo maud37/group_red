@@ -1,0 +1,15 @@
+import json
+
+with open('A_people.json') as json_file:
+    data = json.load(json_file)
+
+filtered_names=[]
+
+for dictionary in data: 
+    if "ontology/networth" in dictionary: 
+        if "title" in dictionary:
+            filtered_names.append(dictionary['title']) 
+
+print(filtered_names)
+
+print(len(filtered_names))
