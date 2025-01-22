@@ -41,10 +41,12 @@ for letter in letters:
         person = {}
         if "ontology/networth" in dictionary and "title" in dictionary and\
             ("ontology/education_label" in dictionary or "ontology/almaMater_label" in dictionary):
+
             person["name"] = (dictionary["title"])
             person["networth"] = (dictionary["ontology/networth"])
             if type(person["networth"]) is list:
                 person["networth"] = person["networth"][0]
+
             if "ontology/education_label" in dictionary:  
                 educations = (dictionary["ontology/education_label"])
                 if type(educations) is not list:
@@ -62,6 +64,7 @@ for letter in letters:
                     person["education"] = alma_mater
                     filtered_data.append(person)
 
+
 with open("results2.json", "w", encoding="utf-8") as file:
     json.dump(filtered_data, file, indent=4, ensure_ascii=False)
 
@@ -70,4 +73,3 @@ with open("results3.csv", "w", encoding="utf-8", newline='') as file:
     writer.writeheader()
     writer.writerows(filtered_data)
 
-    
