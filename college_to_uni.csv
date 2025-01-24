@@ -1,4 +1,4 @@
-college_name,origin_uni
+education,origin_uni
 Harvard University,Harvard University
 Harvard College,Harvard University
 Graduate School of Arts and Sciences,Harvard University
@@ -123,7 +123,7 @@ Yale School of Music,Yale University
 Yale School of Public Health,Yale University
 Yale University,Yale University
 Yale_University_(PhD),Yale University
-University of Chicago,The University of Chicago
+University of Chicago,University of Chicago
 University of Chicago Divinity School,The University of Chicago
 University of Chicago Laboratory Schools,The University of Chicago
 University of Chicago Law School,The University of Chicago
@@ -162,6 +162,7 @@ University of Virginia School of Medicine,University of Virginia
 University of Virginia School of Nursing,University of Virginia
 Pennsylvania State University,Pennsylvania State University
 Pennsylvania State University - Dickinson Law,Pennsylvania State University
+Wharton School of the University of Pennsylvania,University of Pennsylvania
 University of Pennsylvania,University of Pennsylvania
 University of Pennsylvania Economics Department,University of Pennsylvania
 University of Pennsylvania Law School,University of Pennsylvania
