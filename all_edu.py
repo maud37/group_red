@@ -81,7 +81,7 @@ for letter in letters:
 with open("all.json", "w", encoding="utf-8") as file:
     json.dump(filtered_data, file, indent=4, ensure_ascii=False)
 
-with open("all_real.csv", "w", encoding="utf-8", newline='') as file:
+with open("all_real_check.csv", "w", encoding="utf-8", newline='') as file:
     writer = csv.DictWriter(file, ["name", "networth", "education"])
     writer.writeheader()
     writer.writerows(filtered_data)

@@ -6,8 +6,6 @@ all_edu <- read_csv('all_real.csv') |>
     
   pivot_wider(names_from = education, 
               values_from = education_count) |>
-  #  select(- `Bachelor of Arts`, -`Doctor of Philosophy`, 
-  #         -`Master of Arts`)
   mutate(Harvard_total = `Harvard Business School` + `Harvard College`  + `Harvard Law School` + `Harvard University` + 
            `Harvard Graduate School of Design` + `Harvard Graduate School of Education` + `Harvard Divinity School` + 
            `Harvard T.H. Chan School of Public Health`
@@ -49,10 +47,10 @@ all_edu <- read_csv('all_real.csv') |>
   mutate(Chicago_total = `University of Chicago` + `University of Chicago Divinity School` + 
          `University of Chicago Laboratory Schools` + `University of Chicago Law School`
     ) |>
-  mutate(
+  mutate(Edinburgh_total = 
     `University of Edinburgh` + `University of Edinburgh Law School` + `University of Edinburgh Medical School`
   ) |>
-  mutate(
+  mutate(Glasgow_total =
     `University of Glasgow` + `University of Glasgow Medical School` + `University of Glasgow School of Veterinary Medicine`
   )|>
   mutate( Maryland_total =
@@ -83,7 +81,10 @@ all_edu <- read_csv('all_real.csv') |>
   ) |> 
   pivot_longer(cols = everything()) |>
   rename(education = name, education_count = value) |>
-  filter(education_count > 249)
+  filter(education_count > 249) |>
+  select(
+    
+  )
 
 print(all_edu)
 
