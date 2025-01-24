@@ -1,11 +1,15 @@
+# this code wasn't actually used to create any graphs but it shows an overview of which departments were combined to the number for the entire university
+
 library(tidyverse)
 
 all_edu <- read_csv('all_real.csv') |>
   group_by(education) |>
   summarise(education_count = n()) |>
-    
+
+# pivot wider so the schools will be colums names and can be mutated
   pivot_wider(names_from = education, 
               values_from = education_count) |>
+  # combining the different departments from bigger schools (where at least one departmeant arlready has a high count) into one complete column
   mutate(Harvard_total = `Harvard Business School` + `Harvard College`  + `Harvard Law School` + `Harvard University` + 
            `Harvard Graduate School of Design` + `Harvard Graduate School of Education` + `Harvard Divinity School` + 
            `Harvard T.H. Chan School of Public Health`
@@ -79,23 +83,9 @@ all_edu <- read_csv('all_real.csv') |>
         `University of Pennsylvania` + `University of Pennsylvania Economics Department` + `University of Pennsylvania Law School` + `University of Pennsylvania School of Dental Medicine` +
          `University of Pennsylvania School of Engineering and Applied Science` + `University of Pennsylvania School of Nursing` + `Perelman School of Medicine at the University of Pennsylvania`
   ) |> 
+  # turning it back in a table needed for the graph
   pivot_longer(cols = everything()) |>
-  rename(education = name, education_count = value) |>
-  filter(education_count > 249) |>
-  select(
-    
-  )
+  rename(education = name, education_count = value) 
 
 print(all_edu)
 
-
-
-# Barplot showing the n.o. of ppl attending the unis
-ggplot(data = all_edu) +
-  aes(x = education, y = education_count, fill = education) +
-  geom_col() +
-  xlab("University") +
-  ylab("Number of Individuals Who Attended") +
-  scale_x_discrete(labels=NULL) +
-  theme_minimal()
-# ggsave('no_individuals_attended.pdf')

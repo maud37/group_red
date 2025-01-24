@@ -1,40 +1,18 @@
+# code to create data set for all people on wikipedia with their education and/or alma mater listed
+# same as the trying.py file, difference is that listing networth is optional now
+#       it's a different file because at the start i wasn't sure how much changes would need to be made and it seemed clearer to leave it seperate
 import json
 import csv
 import re
 
 parentheses = re.compile(r'\(.+\)')
 
-letters = { 
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S", 
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z"
-}
+letters = [
+    "A",    "B",    "C",    "D",    "E",    "F",    "G",    "H",    "I",    "J",    "K",    "L",    "M",    "N",
+    "O",    "P",    "Q",    "R",    "S",     "T",    "U",    "V",    "W",    "X",    "Y",    "Z"
+]
 
 filtered_data=[]
-parent_data = []
 
 for letter in letters:
     with open(f"{letter}_people.json") as json_file:
@@ -42,21 +20,16 @@ for letter in letters:
 
     for dictionary in data: 
         person = {}
+        # networth no longer mandotory to be selected
         if "title" in dictionary and\
         ("ontology/education_label" in dictionary or "ontology/almaMater_label" in dictionary):
             person["name"] = (dictionary["title"]).replace("_", " ")
             person["name"] = parentheses.sub("", person["name"])
+            # networth is only listed if it's there
             if "ontology/networth" in dictionary:
                 person["networth"] = (dictionary["ontology/networth"])
                 if type(person["networth"]) is list:
-                    person["networth"] = person["networth"][0]
-            # if    "ontology/parent" in dictionary:
-                # person["parent1"] = (dictionary["ontology/parent_label"])
-                # if type(person["parent1"]) is list:
-                #     person["parent2"] = person["parent1"][1]
-                #     person["parent1"] = person["parent1"][0]
-                    # parent_data.append(person["parent1"])
-                    # parent_data.append(person["parent2"])                 
+                    person["networth"] = person["networth"][0]                
             if "ontology/education_label" in dictionary:  
                 educations = (dictionary["ontology/education_label"])
                 if type(educations) is not list:
@@ -73,9 +46,6 @@ for letter in letters:
                     person = person.copy()
                     person["education"] = alma_mater
                 filtered_data.append(person)
-
-
-# print(len(filtered_data)
 
 
 with open("all.json", "w", encoding="utf-8") as file:
